@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: divya-birthday-surprise
+    env: static
+    buildCommand: ""
+    staticPublishPath: ./
+    pullRequestPreviewsEnabled: false

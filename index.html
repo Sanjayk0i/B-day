@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy Birthday Divya ♥ — a little surprise</title>
+  <meta name="description" content="An interactive romantic birthday surprise animation for Divya with Twilight Lavender & Rose Gold aesthetics.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <main id="experience-container" role="main" aria-label="Interactive Birthday Celebration for Divya">
+
+    <!-- Audio Element -->
+    <audio id="bg-audio" preload="auto" src="birthday_audio.mp3"></audio>
+
+    <!-- Top Floating Sound Toggle -->
+    <header class="ui-btn-wrap top-bar-controls">
+      <button id="sound-btn" class="pill-btn icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+        <!-- Sound On Icon -->
+        <svg id="icon-sound-on" viewBox="0 0 24 24">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+        <!-- Sound Muted Icon -->
+        <svg id="icon-sound-muted" viewBox="0 0 24 24" style="display:none;">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27l4.73 4.73H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Canvas Layer for Particles, Heart Explosion, Tree Canopy Blooming Blossoms, Drifting Petals & Fireflies -->
+    <canvas id="fx-canvas"></canvas>
+
+    <!-- Interactive SVG Layer for Bow, Arrow, Initial Heart, Tree Trunk & Branches -->
+    <svg id="scene-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Soft ethereal glow filter for initial heart -->
+        <filter id="heart-glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur1" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="38" result="blur2" />
+          <feMerge>
+            <feMergeNode in="blur2" />
+            <feMergeNode in="blur1" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <!-- Twilight Rose-Gold & Amethyst Heart 3D Gradient -->
+        <radialGradient id="heart-grad-3d" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#ffa0c0" />
+          <stop offset="35%" stop-color="#ee4e8b" />
+          <stop offset="70%" stop-color="#b62a6b" />
+          <stop offset="100%" stop-color="#691646" />
+        </radialGradient>
+
+        <!-- Rose Gold Metallic Bow Gradient -->
+        <linearGradient id="bow-wood-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e29b8c" />
+          <stop offset="50%" stop-color="#a85d52" />
+          <stop offset="100%" stop-color="#5a2e28" />
+        </linearGradient>
+
+        <!-- Twilight Tree Bark Gradient -->
+        <linearGradient id="tree-bark-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#341c2c" />
+          <stop offset="45%" stop-color="#4d2b42" />
+          <stop offset="80%" stop-color="#3b1e32" />
+          <stop offset="100%" stop-color="#23101e" />
+        </linearGradient>
+
+        <!-- Daisy / Crystal Blossom Petal Gradient -->
+        <linearGradient id="daisy-petal-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="80%" stop-color="#f8eefb" />
+          <stop offset="100%" stop-color="#e3cbef" />
+        </linearGradient>
+
+        <!-- Tulip / Rose Petal Gradient for Arrow Fletching -->
+        <linearGradient id="tulip-pink-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fca5c6" />
+          <stop offset="100%" stop-color="#c92a6c" />
+        </linearGradient>
+      </defs>
+
+      <!-- Layer 1: Tree Trunk & Branch Skeleton -->
+      <g id="tree-svg-group" opacity="0"></g>
+
+      <!-- Layer 2: Initial Ethereal Glowing Heart -->
+      <g id="initial-heart-group">
+        <!-- Dual Twilight & Rose Halo -->
+        <circle id="heart-ambient-halo" cx="0" cy="0" r="115" fill="rgba(225, 90, 160, 0.24)" filter="url(#heart-glow-filter)" />
+        <circle cx="0" cy="0" r="85" fill="rgba(165, 105, 225, 0.18)" filter="url(#heart-glow-filter)" />
+        
+        <!-- Heart Main Body -->
+        <g id="heart-body-wrap" class="heart-pulse heart-glow">
+          <path id="main-heart-path"
+            d="M 0, 48 
+               C -48, 16 -88, -25 -72, -62 
+               C -58, -94 -16, -92 0, -56 
+               C 16, -92 58, -94 72, -62 
+               C 88, -25 48, 16 0, 48 Z" 
+            fill="url(#heart-grad-3d)" />
+
+          <!-- Specular 3D Highlight Glint -->
+          <ellipse cx="-26" cy="-56" rx="14" ry="9" transform="rotate(-28, -26, -56)" fill="#ffffff" opacity="0.85" filter="blur(1px)" />
+
+          <!-- Delicate secondary rim shine -->
+          <path d="M 12,-52 C 28,-68 46,-64 56,-48" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+        </g>
+      </g>
+
+      <!-- Layer 3: Bow & Arrow System -->
+      <g id="bow-system-group">
+        <!-- Bow Limb (Curved Recurve Arc in Rose Gold & Dark Mahogany) -->
+        <path id="bow-limb-path" stroke="url(#bow-wood-grad)" stroke-width="5.5" stroke-linecap="round" fill="none" />
+        <!-- Bow Grip Wrap in Twilight Plum -->
+        <path id="bow-grip-path" stroke="#2a1424" stroke-width="7.5" stroke-linecap="round" fill="none" />
+        <!-- Dynamic Bow String (Shimmering Silver-Gold) -->
+        <path id="bow-string-path" stroke="#f6eff9" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.92" />
+
+        <!-- The Flower Arrow -->
+        <g id="arrow-group" class="bow-element">
+          <!-- Invisible interactive hit zone for effortless dragging on phones & desktops -->
+          <circle cx="-10" cy="0" r="48" fill="transparent" style="cursor: grab;" />
+
+          <!-- Arrow Shaft (Rose-Gold / Warm Cedar Stem) -->
+          <line x1="-36" y1="0" x2="42" y2="0" stroke="#754a5c" stroke-width="3" stroke-linecap="round" />
+
+          <!-- Nock / Fletching: Tulip 3-Petal Blossom at the back -->
+          <g transform="translate(-36, 0) scale(0.95)">
+            <!-- Left Petal -->
+            <path d="M 0,0 C -6,-10 -15,-12 -18,-4 C -16,2 -8,4 0,0 Z" fill="url(#tulip-pink-grad)" />
+            <!-- Right Petal -->
+            <path d="M 0,0 C -6,10 -15,12 -18,4 C -16,-2 -8,-4 0,0 Z" fill="url(#tulip-pink-grad)" />
+            <!-- Center Petal -->
+            <path d="M 0,0 C -8,-6 -20,-5 -22,0 C -20,5 -8,6 0,0 Z" fill="#eb4d88" />
+          </g>
+
+          <!-- Arrowhead: Enchanted Daisy & Crystal Pistil at the tip -->
+          <g id="arrow-daisy-head" transform="translate(42, 0)">
+            <!-- 8 Radiant Petals -->
+            <g id="daisy-petals">
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(0)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(45)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(90)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(135)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(180)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(225)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(270)" />
+              <ellipse cx="7" cy="0" rx="6.2" ry="2.6" fill="url(#daisy-petal-grad)" transform="rotate(315)" />
+            </g>
+            <!-- Center Golden Crystal Pistil -->
+            <circle cx="0" cy="0" r="4.6" fill="#fed166" stroke="#e09520" stroke-width="0.8" />
+            <circle cx="-1" cy="-1" r="1.6" fill="#fff5b8" opacity="0.85" />
+          </g>
+        </g>
+      </g>
+    </svg>
+
+    <!-- Scene 1 Text Overlay: "a little something, for you" -->
+    <div id="intro-caption" class="intro-caption">a little something, for you</div>
+
+    <!-- Scene 1 Pull & Release Guidance Label -->
+    <div id="pull-instruction" class="pull-instruction">PULL & RELEASE</div>
+
+    <!-- Scene 1 Drag Hand Cursor Hint -->
+    <div id="drag-hand-hint" class="drag-hand-hint">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="#582a45">
+        <path d="M13.5 5.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V12h-1V3.5C9.5 2.67 8.83 2 8 2s-1.5.67-1.5 1.5V12h-1V5.5C5.5 4.67 4.83 4 4 4s-1.5.67-1.5 1.5V16c0 4.42 3.58 8 8 8s8-3.58 8-8V8.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V12h-1V5.5z" opacity="0.85" stroke="#ffffff" stroke-width="1.2"/>
+      </svg>
+    </div>
+
+    <!-- ==========================================================================
+         SCENE 4: CINEMATIC TWILIGHT PLUM & ROSE GOLD REVEAL OVERLAY
+         ========================================================================== -->
+    <section id="cinematic-overlay" aria-hidden="true">
+      <div class="letterbox-bar top-bar"></div>
+
+      <div class="banner-content-wrap">
+        <p class="banner-caption-top">make a wish, Divya...</p>
+
+        <h1 class="banner-title-main">
+          Happy Birthday
+          <!-- Twinkling Celestial Star Flare on 'i' dot -->
+          <span id="candle-flare" class="candle-glow-dot"></span>
+        </h1>
+
+        <!-- Rose Gold Curved Underline Stroke -->
+        <svg class="golden-accent-stroke" viewBox="0 0 320 20" fill="none">
+          <path d="M 12 10 Q 160 18 308 8" />
+        </svg>
+
+        <p class="banner-caption-bottom">to Divya, the brightest star in my sky</p>
+      </div>
+
+      <div class="letterbox-bar bottom-bar"></div>
+    </section>
+
+    <!-- ==========================================================================
+         SCENE 7: FINAL BIRTHDAY MESSAGE COMPOSITION
+         ========================================================================== -->
+    <section id="final-message-container" aria-hidden="true">
+      <div class="final-text-card">
+        <p class="final-subtitle-top">... make it count</p>
+        <h2 class="final-title-script">Happy Birthday Divya</h2>
+        <p class="final-subtitle-bottom">here's to a year that blooms with wonder</p>
+
+        <!-- Second Interactive Pull & Release Action -->
+        <div id="final-pull-action" class="final-pull-action" role="button" tabindex="0" aria-label="Pull and release to reveal secret birthday letter">
+          <div class="pull-ribbon-handle" id="pull-ribbon-handle">
+            <div class="drag-hand-icon">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="#582a45">
+                <path d="M13.5 5.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V12h-1V3.5C9.5 2.67 8.83 2 8 2s-1.5.67-1.5 1.5V12h-1V5.5C5.5 4.67 4.83 4 4 4s-1.5.67-1.5 1.5V16c0 4.42 3.58 8 8 8s8-3.58 8-8V8.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V12h-1V5.5z" opacity="0.9" stroke="#ffffff" stroke-width="1.3"/>
+              </svg>
+            </div>
+            <div class="pull-text-wrap">
+              <span class="pull-text-primary">PULL &amp; RELEASE</span>
+              <span class="pull-text-sub">for your secret birthday letter 💌</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Secret Birthday Love Letter Modal for Divya -->
+    <div id="secret-letter-modal" class="letter-modal-overlay" aria-hidden="true">
+      <div class="letter-card-wrapper" role="dialog" aria-modal="true" aria-labelledby="letter-title">
+        <button id="close-letter-btn" class="close-card-btn" aria-label="Close Letter">✕</button>
+
+        <div class="letter-stamp-badge">
+          <span>For Divya ♥</span>
+        </div>
+
+        <div class="letter-body-content">
+          <h3 id="letter-title" class="letter-heading">Dearest Divya 🌸</h3>
+
+          <p class="letter-paragraph">
+            Happy Birthday to the most special person in my universe! You bring so much sweetness, light, and warmth into every single day.
+          </p>
+
+          <p class="letter-paragraph">
+            Watching this tree bloom into a heart is just a tiny glimpse of how my heart blooms whenever I think of you. May this year shower you with boundless joy, gorgeous laughter, good health, and all the magical dreams your heart holds.
+          </p>
+
+          <p class="letter-paragraph highlight-quote">
+            "Like flowers in spring and stars in the night, you make every ordinary moment feel extraordinary."
+          </p>
+
+          <p class="letter-signoff">
+            With all my love &amp; warmest wishes,<br>
+            <span class="signoff-heart">Happy Birthday, my love! 🎂✨</span>
+          </p>
+        </div>
+
+        <div class="letter-footer-actions">
+          <button id="card-replay-btn" class="pill-btn primary-action">Replay Surprise ✨</button>
+          <button id="card-enjoy-btn" class="pill-btn secondary-action">View Tree 🌿</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Replay Floating Button -->
+    <div class="ui-btn-wrap bottom-replay-wrap">
+      <button id="replay-btn" class="pill-btn replay-btn" aria-label="Replay Experience">
+        <span>Replay</span>
+        <span aria-hidden="true">✨</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Main Animation Script -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,808 @@
+/* ==========================================================================
+   BIRTHDAY SURPRISE FOR DIVYA ♥ — TWILIGHT LAVENDER & ROSE GOLD THEME
+   Unique, bespoke, ethereal luxury aesthetic
+   ========================================================================== */
+
+:root {
+  /* Twilight Lavender & Rose Gold Palette */
+  --bg-twilight-pearl: #f8f4fb;
+  --bg-twilight-radial: radial-gradient(circle at 65% 36%, #fff2f8 0%, #f4ebfa 40%, #ece2f5 100%);
+  --bg-banner-twilight: radial-gradient(circle at 50% 50%, #532057 0%, #3d1442 55%, #240a28 100%);
+
+  /* Heart & Accent Colors */
+  --color-heart-primary: #e65c92;
+  --color-heart-glow: rgba(220, 90, 155, 0.45);
+  --color-violet-glow: rgba(160, 100, 220, 0.35);
+  --color-rose-gold: #e8a598;
+  --color-rose-gold-glow: rgba(232, 165, 152, 0.7);
+  --color-gold-star: #fed166;
+  
+  /* Text & Contrast */
+  --color-text-plum: #381f3b;
+  --color-text-subtle: #7a637d;
+  --color-text-cream: #fff5fa;
+  --color-text-lavender: #e2ccf0;
+
+  /* Typography */
+  --font-serif-display: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+  --font-serif-caption: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-script-romantic: 'Great Vibes', 'Alex Brush', cursive;
+  --font-ui: 'Montserrat', sans-serif;
+
+  --transition-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-twilight-pearl);
+  font-family: var(--font-serif-caption);
+  color: var(--color-text-plum);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Master App Container */
+#experience-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg-twilight-radial);
+  transition: background 1.4s var(--transition-smooth);
+}
+
+/* Stardust & Starlight Atmospheric Shimmer */
+#experience-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(rgba(240, 180, 210, 0.15) 1px, transparent 1px),
+    radial-gradient(rgba(190, 160, 240, 0.12) 1.5px, transparent 1.5px);
+  background-size: 55px 55px, 85px 85px;
+  background-position: 0 0, 30px 40px;
+  pointer-events: none;
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* Base Canvas for full-screen particles, heart burst, blooming canopy, drifting petals & fireflies */
+#fx-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Interactive SVG Layer (Bow, Arrow, Initial Heart, Tree Trunk & Branches) */
+#scene-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+}
+
+/* ==========================================================================
+   SCENE 1: INITIAL SCREEN & CAPTIONS
+   ========================================================================== */
+
+.intro-caption {
+  position: absolute;
+  text-align: center;
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--color-text-plum);
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 1.2s ease, transform 1.2s var(--transition-smooth);
+  pointer-events: none;
+  z-index: 25;
+  text-shadow: 0 2px 12px rgba(240, 210, 235, 0.9);
+}
+
+.intro-caption.visible {
+  opacity: 0.95;
+  transform: translateY(0);
+}
+
+.pull-instruction {
+  position: absolute;
+  font-family: var(--font-ui);
+  font-size: clamp(0.72rem, 1.35vw, 0.92rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pull-instruction.visible {
+  opacity: 0.85;
+  animation: pulseGuidance 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseGuidance {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.97); }
+}
+
+/* Drag Hand Indicator */
+.drag-hand-hint {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  filter: drop-shadow(0 2px 8px rgba(90, 40, 80, 0.25));
+  animation: dragHandGuide 2.2s infinite ease-in-out;
+}
+
+@keyframes dragHandGuide {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  50% { transform: translate(-22px, 22px) scale(0.92); opacity: 0.35; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+}
+
+/* Glowing Heart Styling with Ethereal Rose-Gold / Lavender Glow */
+.heart-glow {
+  filter: drop-shadow(0 0 26px var(--color-heart-glow)) drop-shadow(0 0 55px var(--color-violet-glow));
+  transition: transform 0.3s var(--transition-smooth), opacity 0.4s ease;
+}
+
+.heart-pulse {
+  animation: softHeartbeat 3.2s infinite ease-in-out;
+  transform-origin: center center;
+}
+
+@keyframes softHeartbeat {
+  0%, 100% { transform: scale(1); }
+  16% { transform: scale(1.06); }
+  28% { transform: scale(1.02); }
+  44% { transform: scale(1.07); }
+  62% { transform: scale(1); }
+}
+
+/* Heart impact squash & shake */
+.heart-impact {
+  animation: heartImpactAnim 0.38s ease-out forwards;
+}
+
+@keyframes heartImpactAnim {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.22, 0.8) rotate(-6deg); filter: brightness(1.6); }
+  55% { transform: scale(0.82, 1.18) rotate(5deg); }
+  85% { transform: scale(1.06, 0.95) rotate(-2deg); }
+  100% { transform: scale(1); }
+}
+
+/* Interactive Bow & Arrow Styling */
+.bow-element {
+  cursor: grab;
+  touch-action: none;
+}
+
+.bow-element:active, .bow-dragging {
+  cursor: grabbing !important;
+}
+
+/* ==========================================================================
+   SCENE 4: CINEMATIC TWILIGHT PLUM & ROSE GOLD BANNER
+   ========================================================================== */
+
+#cinematic-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.85s ease, visibility 0.85s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#cinematic-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Top & Bottom Cinematic Black Widescreen Letterbox Bars */
+.letterbox-bar {
+  width: 100%;
+  height: 0;
+  background-color: #120517;
+  transition: height 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 45;
+}
+
+#cinematic-overlay.active .letterbox-bar {
+  height: clamp(38px, 8.5vh, 76px);
+}
+
+/* Center Twilight Banner Content */
+.banner-content-wrap {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-banner-twilight);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.45);
+  padding: 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Atmospheric Starlight Nebula inside banner */
+.banner-content-wrap::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(750px, 90vw);
+  height: min(480px, 65vh);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(230, 130, 200, 0.32) 0%, rgba(160, 100, 230, 0.15) 45%, transparent 75%);
+  pointer-events: none;
+}
+
+.banner-caption-top {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.25rem, 2.7vw, 1.9rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-rose-gold);
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.9s ease 0.2s, transform 0.9s var(--transition-smooth) 0.2s;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+.banner-title-main {
+  position: relative;
+  font-family: var(--font-serif-display);
+  font-size: clamp(3.2rem, 9.6vw, 6.8rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--color-text-cream);
+  letter-spacing: -0.01em;
+  margin: 10px 0 16px;
+  opacity: 0;
+  transform: translateY(18px) scale(0.97);
+  transition: opacity 1s ease 0.45s, transform 1s var(--transition-smooth) 0.45s;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45), 0 0 35px rgba(230, 140, 200, 0.25);
+}
+
+/* Glowing Celestial Star Flare on top of 'i' in Birthday */
+.candle-glow-dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #ffffff 15%, #ffd166 50%, #f472b6 85%, transparent 100%);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 10px #ffd166) drop-shadow(0 0 24px #e879f9);
+  pointer-events: none;
+  animation: starFlareShimmer 2s infinite alternate ease-in-out;
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.6s ease 1s;
+}
+
+@keyframes starFlareShimmer {
+  0% { transform: scale(0.85) rotate(0deg); filter: drop-shadow(0 0 8px #ffd166); }
+  50% { transform: scale(1.22) rotate(45deg); filter: drop-shadow(0 0 18px #fff07c) drop-shadow(0 0 30px #d946ef); }
+  100% { transform: scale(0.92) rotate(90deg); filter: drop-shadow(0 0 12px #f59e0b); }
+}
+
+/* Rose Gold Curved Flourish Underline */
+.golden-accent-stroke {
+  width: min(350px, 75vw);
+  height: 20px;
+  margin: 0 auto 16px;
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: opacity 0.8s ease 0.8s, transform 0.9s var(--transition-smooth) 0.8s;
+}
+
+.golden-accent-stroke path {
+  stroke: var(--color-rose-gold);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  fill: none;
+  filter: drop-shadow(0 0 8px var(--color-rose-gold-glow));
+}
+
+.banner-caption-bottom {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.15rem, 2.4vw, 1.65rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--color-text-lavender);
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.9s ease 0.9s, transform 0.9s var(--transition-smooth) 0.9s;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+#cinematic-overlay.active .banner-caption-top,
+#cinematic-overlay.active .banner-title-main,
+#cinematic-overlay.active .candle-glow-dot,
+#cinematic-overlay.active .banner-caption-bottom {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+#cinematic-overlay.active .golden-accent-stroke {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   SCENE 7: FINAL BIRTHDAY MESSAGE COMPOSITION
+   ========================================================================== */
+
+#final-message-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 clamp(20px, 6vw, 95px);
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+#final-message-container.visible {
+  opacity: 1;
+}
+
+.final-text-card {
+  max-width: min(540px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.final-subtitle-top {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #634768;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 1.2s ease 0.3s, transform 1.2s var(--transition-smooth) 0.3s;
+}
+
+.final-title-script {
+  font-family: var(--font-script-romantic);
+  font-size: clamp(3.8rem, 10vw, 7.8rem);
+  line-height: 1.05;
+  color: #7b1c4e;
+  margin-left: -6px;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 1.3s ease 0.6s, transform 1.3s var(--transition-smooth) 0.6s;
+  text-shadow: 0 4px 20px rgba(135, 30, 85, 0.2), 0 1px 3px rgba(255, 255, 255, 0.9);
+}
+
+.final-subtitle-bottom {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.15rem, 2.3vw, 1.7rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #58395e;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1.2s ease 0.9s, transform 1.2s var(--transition-smooth) 0.9s;
+}
+
+#final-message-container.visible .final-subtitle-top,
+#final-message-container.visible .final-title-script,
+#final-message-container.visible .final-subtitle-bottom {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Second Interactive Pull Action */
+.final-pull-action {
+  margin-top: 18px;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1s ease 1.2s, transform 1s var(--transition-smooth) 1.2s;
+  display: inline-flex;
+}
+
+#final-message-container.visible .final-pull-action {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final-pull-action:active, .pull-dragging {
+  cursor: grabbing !important;
+}
+
+.pull-ribbon-handle {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid rgba(232, 165, 152, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 10px 24px 10px 16px;
+  border-radius: 999px;
+  box-shadow: 0 6px 25px rgba(135, 30, 85, 0.12), 0 0 16px rgba(232, 165, 152, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  user-select: none;
+}
+
+.pull-ribbon-handle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(135, 30, 85, 0.2), 0 0 24px rgba(232, 165, 152, 0.45);
+  border-color: rgba(220, 90, 155, 0.8);
+}
+
+.drag-hand-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceHandPull 2.2s infinite ease-in-out;
+}
+
+@keyframes bounceHandPull {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(6px) scale(0.95); }
+}
+
+.pull-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.pull-text-primary {
+  font-family: var(--font-ui);
+  font-size: clamp(0.74rem, 1.35vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: #7b1c4e;
+  text-transform: uppercase;
+}
+
+.pull-text-sub {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(0.85rem, 1.4vw, 1.02rem);
+  font-style: italic;
+  color: #7a5f80;
+}
+
+/* Secret Birthday Love Letter Modal */
+.letter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: rgba(24, 8, 28, 0.58);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 36px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s var(--transition-smooth), visibility 0.55s ease;
+}
+
+.letter-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: linear-gradient(135deg, rgba(255, 250, 254, 0.97) 0%, rgba(250, 238, 248, 0.94) 100%);
+  border: 1.5px solid rgba(232, 165, 152, 0.7);
+  box-shadow: 0 20px 60px rgba(45, 10, 40, 0.35), 0 0 45px rgba(232, 165, 152, 0.3);
+  border-radius: 28px;
+  padding: clamp(28px, 6vw, 44px);
+  transform: translateY(30px) scale(0.92);
+  transition: transform 0.55s var(--transition-smooth);
+}
+
+.letter-modal-overlay.open .letter-card-wrapper {
+  transform: translateY(0) scale(1);
+}
+
+.close-card-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(160, 110, 150, 0.3);
+  background: rgba(255, 255, 255, 0.85);
+  color: #7b1c4e;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.close-card-btn:hover {
+  background: #7b1c4e;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+.letter-stamp-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(232, 165, 152, 0.25);
+  border: 1px solid rgba(232, 165, 152, 0.6);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #87205a;
+  margin-bottom: 16px;
+}
+
+.letter-heading {
+  font-family: var(--font-script-romantic);
+  font-size: clamp(2.8rem, 7.5vw, 4.4rem);
+  line-height: 1.1;
+  color: #87205a;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(135, 30, 85, 0.15);
+}
+
+.letter-paragraph {
+  font-family: var(--font-serif-caption);
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  line-height: 1.65;
+  color: #4a2c4e;
+  margin-bottom: 16px;
+}
+
+.letter-paragraph.highlight-quote {
+  font-style: italic;
+  padding: 12px 18px;
+  border-left: 3px solid var(--color-rose-gold);
+  background: rgba(232, 165, 152, 0.12);
+  border-radius: 0 12px 12px 0;
+  color: #6d244f;
+  margin: 18px 0;
+}
+
+.letter-signoff {
+  font-family: var(--font-serif-caption);
+  font-size: 1.18rem;
+  font-style: italic;
+  color: #553359;
+  margin-top: 20px;
+}
+
+.signoff-heart {
+  font-family: var(--font-script-romantic);
+  font-size: 2.2rem;
+  color: #9c1543;
+  display: block;
+  margin-top: 6px;
+}
+
+.letter-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.letter-footer-actions .primary-action {
+  background: linear-gradient(135deg, #a82464 0%, #7b1c4e 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 6px 20px rgba(135, 30, 85, 0.35);
+}
+
+.letter-footer-actions .primary-action:hover {
+  background: linear-gradient(135deg, #c02d74 0%, #8f215b 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.letter-footer-actions .secondary-action {
+  background: rgba(255, 255, 255, 0.9);
+  color: #5a385f;
+}
+
+/* ==========================================================================
+   UI CONTROLS: REPLAY & SOUND BUTTONS (FROSTED GLASSMORPHISM)
+   ========================================================================== */
+
+.ui-btn-wrap {
+  position: absolute;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-bar-controls {
+  top: clamp(16px, 3vh, 28px);
+  right: clamp(16px, 4vw, 32px);
+}
+
+.bottom-replay-wrap {
+  bottom: clamp(20px, 4vh, 36px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pill-btn {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(210, 175, 225, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 999px;
+  padding: 11px 24px;
+  font-family: var(--font-serif-caption);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 600;
+  color: var(--color-text-plum);
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(100, 50, 110, 0.1);
+  transition: all 0.35s var(--transition-smooth);
+}
+
+.pill-btn:hover {
+  background: rgba(255, 255, 255, 0.98);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(160, 80, 140, 0.22);
+  border-color: rgba(220, 140, 190, 0.6);
+  color: #87205a;
+}
+
+.pill-btn:active {
+  transform: translateY(1px);
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.replay-btn {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s var(--transition-smooth), visibility 0.8s;
+}
+
+.replay-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   MOBILE & RESPONSIVE ADAPTATIONS
+   ========================================================================== */
+
+/* Portrait Layout (Phones & Narrow Tablets) */
+@media (max-aspect-ratio: 1/1), (max-width: 768px) {
+  #final-message-container {
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: clamp(80px, 14vh, 120px);
+    text-align: center;
+  }
+
+  .final-text-card {
+    align-items: center;
+    text-align: center;
+    max-width: 95vw;
+  }
+
+  .final-title-script {
+    font-size: clamp(3.2rem, 12.5vw, 4.8rem);
+    margin-left: 0;
+  }
+
+  .banner-title-main {
+    font-size: clamp(2.7rem, 11vw, 4.4rem);
+  }
+
+  .bottom-replay-wrap {
+    bottom: clamp(14px, 2.5vh, 24px);
+  }
+}
+
+/* Landscape / Wide Desktops */
+@media (min-width: 1025px) and (min-aspect-ratio: 1.2/1) {
+  #final-message-container {
+    padding-left: clamp(50px, 8vw, 140px);
+  }
+}
